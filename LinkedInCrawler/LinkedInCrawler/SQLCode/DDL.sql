@@ -1,0 +1,56 @@
+/****** Object:  Table [dbo].[Skills]    Script Date: 4/17/2016 1:57:56 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Skills](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Skills] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 4/17/2016 1:57:56 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+	[Title] [nvarchar](50) NOT NULL,
+	[Current_Position] [nvarchar](50) NOT NULL,
+	[Summary] [text] NULL,
+	[Top_Skills_Counter] [int] NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[UsersSkills]    Script Date: 4/17/2016 1:57:56 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UsersSkills](
+	[User_ID] [int] NOT NULL,
+	[Skill_ID] [int] NOT NULL,
+ CONSTRAINT [PK_UsersSkills] PRIMARY KEY CLUSTERED 
+(
+	[User_ID] ASC,
+	[Skill_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[UsersSkills]  WITH CHECK ADD FOREIGN KEY([Skill_ID])
+REFERENCES [dbo].[Skills] ([ID])
+GO
+ALTER TABLE [dbo].[UsersSkills]  WITH CHECK ADD FOREIGN KEY([User_ID])
+REFERENCES [dbo].[Users] ([ID])
+GO
