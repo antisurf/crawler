@@ -1,0 +1,76 @@
+﻿<script>
+    function parseURL() {
+        var url = $('#urlTbx').val();
+        var data = {
+            url: url
+        };
+        $.ajax({
+            method: 'POST',
+            data: data,
+            url: '/Home/ParseHTML',
+            dataType: 'json'
+        }).done(function (response) {
+            console.log(response);
+        }).fail(function (jqXHR, textStatus) {
+            console.log('fail');
+        });
+    }
+
+    function findUser() {
+        var name = $('#nameTbx').val();
+        var data = {
+            name: name
+        };
+        $.ajax({
+            method: 'POST',
+            data: data,
+            url: '/Home/FindUser',
+            dataType: 'json'
+        }).done(function (response) {
+            console.log(response);
+        }).fail(function (jqXHR, textStatus) {
+            console.log('fail');
+        });
+    }
+
+    function getTopSkillsCounter() {
+        var name = $('#nameTbx').val();
+        var data = {
+            name: name
+        };
+        $.ajax({
+            method: 'POST',
+            data: data,
+            url: '/Home/GetTopSkillsCounter',
+            dataType: 'json'
+        }).done(function (response) {
+            console.log(response);
+        }).fail(function (jqXHR, textStatus) {
+            console.log('fail');
+        });
+    }
+
+</script>
+<h1>LinkedIn Crawler API</h1>
+<table>
+    <tr>
+        <td>
+            <input id="urlTbx" type="url" placeholder="URL"/>
+        </td>
+        <td>
+            <button type="button" onclick="parseURL()">Search</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input id="nameTbx" type="text" placeholder="Name" />
+        </td>
+        <td>
+            <button type="button" onclick="findUser()">Find</button>
+        </td>
+        <td>
+            <button type="button" onclick="getTopSkills()">Find</button>
+        </td>
+    </tr>
+</table>
+
